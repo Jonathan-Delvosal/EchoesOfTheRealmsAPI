@@ -1,0 +1,16 @@
+﻿juste un txt de test
+
+"ConnectionStrings": {
+    "Default": "server=EchoesOfTheRealms.mssql.somee.com;database=EchoesOfTheRealms;uid=Hakuryu_SQLLogin_1;pwd=vgndzvm882;trust server certificate=true"
+
+      //Hakuryu_SQLLogin_1
+      //vgndzvm882
+
+modifier les tables "faciles" comme character
+
+atk ? 
+    faire une nouvelle table ? 
+
+faire une table de type d'équipement ? 
+faire une table de matériaux d'équipement ? 
+faire une table de type de monstre ? 

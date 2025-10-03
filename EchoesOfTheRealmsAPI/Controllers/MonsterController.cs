@@ -16,7 +16,7 @@ namespace EotRAPI.Controllers
 
             if (id == 1)
             {
-                return Ok(new MonsterScreenResponseDTO { ID = id, Name = "Loup des neiges" });
+                return Ok(new MonsterScreenResponseDTO { ID = id, Type = "", Name = "Loup des neiges" });
             }
 
             else if (id == 2)
