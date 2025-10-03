@@ -1,0 +1,4 @@
+
+- faire controleur pour équipement et classe
+- faire les DTO pour les affichages des équipements et classes
+
