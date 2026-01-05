@@ -1,6 +1,8 @@
-﻿using EotR.App.Services;
+﻿using EchoesOfTheRealmsShared.Services;
+using EotR.App.Services;
 using EotRAPI.DTO;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace EotRAPI.Controllers
 {
@@ -29,5 +31,7 @@ namespace EotRAPI.Controllers
 
 
         }
+
     }
+
 }

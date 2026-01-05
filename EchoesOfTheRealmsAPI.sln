@@ -1,15 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36518.9 d17.14
+VisualStudioVersion = 17.14.36518.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EchoesOfTheRealmsAPI", "EchoesOfTheRealmsAPI\EchoesOfTheRealmsAPI.csproj", "{346F6EA3-8866-440C-8BF1-6EF3FC9C64B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EotR.App", "EotR.App\EotR.App.csproj", "{ACD22E27-CF52-4FCD-9576-A1EB31EFAB96}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EotR.Domain", "EotR.Domain\EotR.Domain.csproj", "{BD3CD025-1849-407A-91AA-88780CB346DF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EotR.Infra", "EotR.Infra\EotR.Infra.csproj", "{0E88E34C-F3DA-4412-86FD-9FEAA5FBD889}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EchoesOfTheRealmsShared", "..\EchoesOfTheRealmsShared\EchoesOfTheRealmsShared\EchoesOfTheRealmsShared.csproj", "{39E31565-C9CC-92DD-F2ED-7C7C772417E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,18 +17,10 @@ Global
 		{346F6EA3-8866-440C-8BF1-6EF3FC9C64B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{346F6EA3-8866-440C-8BF1-6EF3FC9C64B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{346F6EA3-8866-440C-8BF1-6EF3FC9C64B8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ACD22E27-CF52-4FCD-9576-A1EB31EFAB96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ACD22E27-CF52-4FCD-9576-A1EB31EFAB96}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ACD22E27-CF52-4FCD-9576-A1EB31EFAB96}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ACD22E27-CF52-4FCD-9576-A1EB31EFAB96}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BD3CD025-1849-407A-91AA-88780CB346DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BD3CD025-1849-407A-91AA-88780CB346DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BD3CD025-1849-407A-91AA-88780CB346DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BD3CD025-1849-407A-91AA-88780CB346DF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0E88E34C-F3DA-4412-86FD-9FEAA5FBD889}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0E88E34C-F3DA-4412-86FD-9FEAA5FBD889}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0E88E34C-F3DA-4412-86FD-9FEAA5FBD889}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0E88E34C-F3DA-4412-86FD-9FEAA5FBD889}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39E31565-C9CC-92DD-F2ED-7C7C772417E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39E31565-C9CC-92DD-F2ED-7C7C772417E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39E31565-C9CC-92DD-F2ED-7C7C772417E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39E31565-C9CC-92DD-F2ED-7C7C772417E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

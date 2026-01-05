@@ -11,7 +11,7 @@ namespace EotR.App.Utils
 {
     public class JwtManager
     {
-        private readonly JwtSecurityTokenHandler _handler;
+        private readonly JwtSecurityTokenHandler _handler = new JwtSecurityTokenHandler();
 
         private readonly SecurityKey _securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("EchoesOfTheRealms by Haku"));
 
@@ -36,21 +36,21 @@ namespace EotR.App.Utils
             return _handler.WriteToken(t);
         }
 
-        public ClaimsPrincipal ValidateToken(string token)
+        public ClaimsPrincipal? ValidateToken(string token)
         {
             try
             {
-                return _handler.ValidateToken(new TokenValidationParameters
+                return _handler.ValidateToken(token, new TokenValidationParameters
                 {
                     ValidateAudience = false,
-                    ValidateIssuer = "EchoesOfTheRealms",
-                    IssuerSigningKeys = _securityKey,
+                    ValidateIssuer = false,
+                    IssuerSigningKey = _securityKey,
                     ClockSkew = TimeSpan.FromMinutes(1)
                 }, out SecurityToken key);
             }
             catch (Exception) 
             {
-                return null,
+                return null;
             }
 
 
