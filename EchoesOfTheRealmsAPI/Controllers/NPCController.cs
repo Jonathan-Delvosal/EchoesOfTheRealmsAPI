@@ -6,11 +6,11 @@ namespace EchoesOfTheRealmsAPI.Controllers
 
     [ApiController]
     [Route("api/PNJ")]
-    public class PnjController : ControllerBase
+    public class NPCController : ControllerBase
     {
         private readonly AIService _aiService;
 
-        public PnjController(AIService aiService) => _aiService = aiService;
+        public NPCController(AIService aiService) => _aiService = aiService;
 
         [HttpGet("Marchand")]
         public async Task<IActionResult> Marchand([FromQuery] string message)
