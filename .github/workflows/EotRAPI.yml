@@ -37,6 +37,4 @@ jobs:
       - name: step7
         run: dotnet build -o publish
       - name: step8
-        run: dotnet deploy 
-      - name: step9
         run: ls -a -l publish
