@@ -1,0 +1,42 @@
+﻿#Nom du pipeline
+name: Echoes Of The Realms Pipeline
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  #nom de votre premier job
+  job1:
+    #sur quel type de machine le job doit s'exécuter
+    runs-on: ubuntu-latest
+    #étapes du job
+    steps:
+      - name: step1
+        run: echo "This is the first step of the Echoes Of The Realms Pipeline"
+
+        #prends le code sur git
+      - name: step2
+        uses: actions/checkout@v6
+
+        #affiche les fichiers
+      - name: step3
+        run: ls -a -l
+
+      - name: step4
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: step5
+        run: dotnet restore
+      # - name: step6
+        # run: dotnet test
+      - name: step7
+        run: dotnet build -o publish
+      - name: step8
+        run: dotnet deploy 
+      - name: step9
+        run: ls -a -l publish
