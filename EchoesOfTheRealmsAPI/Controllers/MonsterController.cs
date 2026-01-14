@@ -1,8 +1,8 @@
 ﻿using EchoesOfTheRealms;
+using EchoesOfTheRealmsShared.DTO;
 using EchoesOfTheRealmsShared.Entities.MonsterFiles;
 using EchoesOfTheRealmsShared.Services;
-using EotR.App.Services;
-using EotRAPI.DTO;
+using EotR.App.Services; 
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -14,20 +14,45 @@ namespace EotRAPI.Controllers
     public class MonsterController(MonsterService _mService) : ControllerBase
     {
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         [ProducesResponseType(typeof(MonsterScreenResponseDTO), 200, "application/json")]
         [EndpointDescription("Permet d'afficher les statistiques d'un monstre, selon son ID / Allows you to display a monster's statistics, according to its ID")]
-        //public IActionResult MonsterScreen([FromRoute] int id)
-        //{
 
-        //if (true) //si l'id est dans la db.... ?
-        //{
-        //    _mService.GetById(id);
+        public IActionResult GetMonsterById(long id)
+        {
 
-        //    return Ok(new MonsterScreenResponseDTO { id });
-        //}
+            if (id <= 0) return BadRequest();
 
-        //else return NotFound();
+            MonsterScreenResponseDTO? monster = _mService.GetById(id);
+            if (monster == null) { return NotFound(); }
+            else
+            {
+                return Ok(monster);
+            }
+
+
+
+        }
+
+        [HttpGet("Random Level")]
+        [ProducesResponseType(typeof(MonsterScreenResponseDTO), 200, "application/json")]
+        [EndpointDescription("Choisi un monstre random pour lancer un combat / choose a random monster to start a fight")]
+        public IActionResult GetRandomMonster(int lvlMin, int lvlMax)
+        {
+
+            // Todo mapper en DTO 
+            return Ok(_mService.GetMonsterByRndLvl(lvlMin, lvlMax));
+        }
+
+
+
+
+
+
+
+
+
+
 
         //if (id == 1)
         //{
@@ -43,13 +68,7 @@ namespace EotRAPI.Controllers
 
 
         //}
-        [HttpGet("Random")]
-        public IActionResult GetRandomMonster(int lvlMin, int lvlMax)
-        {
 
-            // TO DO mapper en DTO 
-            return Ok(_mService.GetMonsterByLvl(lvlMin, lvlMax));
-        }
 
 
     }

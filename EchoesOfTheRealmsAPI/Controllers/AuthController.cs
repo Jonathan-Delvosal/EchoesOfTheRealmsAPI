@@ -7,9 +7,9 @@ namespace EchoesOfTheRealmsAPI.Controllers
     public class AuthController : ControllerBase
     {
 
-        // TO DO: Get pour les connexions
+        // Todo: Get pour les connexions
 
-        // TO DO: Post pour les inscriptions
+        // Todo: Post pour les inscriptions
 
 
 
