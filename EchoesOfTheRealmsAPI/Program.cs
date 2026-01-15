@@ -29,7 +29,11 @@ builder.Services.AddDbContext<EotRContext>(b => b.UseSqlServer("workstation id=E
 //Ajout du service venant de l'app externe
 builder.Services.AddScoped<ClasseTest>();
 
+builder.Services.AddCors(b => b.AddDefaultPolicy(o => o.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+
 var app = builder.Build();
+
+app.UseCors();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

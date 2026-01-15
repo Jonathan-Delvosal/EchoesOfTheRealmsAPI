@@ -15,12 +15,12 @@ namespace EchoesOfTheRealmsAPI.Controllers
         [HttpGet("Marchand")]
         public async Task<IActionResult> Marchand([FromQuery] string message)
         {
-            // chercher le preprompt du marchand dans la DB;
+            // Todo chercher le preprompt du marchand dans la DB;
             string? preprompt = null;
 
             (string? assistantM, string? resumeurM) = await _aiService.SendMessage(message, "marchand", preprompt);
 
-            //sauver le resumeurM
+            //Todo sauver le resumeurM
 
             return Ok(new { assistantM, resumeurM });
         }
