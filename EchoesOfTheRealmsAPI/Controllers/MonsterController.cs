@@ -48,34 +48,8 @@ namespace EotRAPI.Controllers
             {
                 return Ok(monster);
             }
+
         }
-
-
-
-
-
-
-
-
-
-
-
-        //if (id == 1)
-        //{
-        //    return Ok(new MonsterScreenResponseDTO { ID = id, Type = "", Name = "Loup des neiges" });
-        //}
-
-        //else if (id == 2)
-        //{
-        //    return Ok(new MonsterScreenResponseDTO { ID = id, Name = "Loup des pairies" });
-        //}
-
-
-
-
-        //}
-
-
 
     }
 
