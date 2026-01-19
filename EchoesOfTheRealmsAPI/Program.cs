@@ -1,6 +1,7 @@
 using EchoesOfTheRealms;
 using EchoesOfTheRealmsShared.Services;
 using EotR.App.Services;
+using EotR.App.Utils;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,8 @@ builder.Services.AddScoped(_ =>
 
 builder.Services.AddScoped<MonsterService>();
 builder.Services.AddScoped<AIService>();
+builder.Services.AddScoped<JwtManager>();
+builder.Services.AddScoped<UserService>();
 
 builder.Services.AddDbContext<EotRContext>(b => b.UseSqlServer("workstation id=EchoesOfTheRealms.mssql.somee.com;packet size=4096;user id=Hakuryu_SQLLogin_1;pwd=vgndzvm882;data source=EchoesOfTheRealms.mssql.somee.com;persist security info=False;initial catalog=EchoesOfTheRealms;TrustServerCertificate=True"));
 
