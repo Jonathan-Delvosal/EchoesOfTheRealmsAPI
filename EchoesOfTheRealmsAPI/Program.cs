@@ -2,6 +2,7 @@ using EchoesOfTheRealms;
 using EchoesOfTheRealmsShared.Services;
 using EotR.App.Services;
 using EotR.App.Utils;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,7 +41,7 @@ var app = builder.Build();
 app.UseCors();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+//if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -48,6 +49,12 @@ if (app.Environment.IsDevelopment())
 
 //app.UseAuthorization();
 
+app.MapGet("/", () =>
+{
+    return Results.Redirect("/swagger");
+});
+
 app.MapControllers();
+
 
 app.Run();
