@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+string cString = builder.Configuration.GetConnectionString("DefaultDev");
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -27,7 +28,7 @@ builder.Services.AddScoped<AIService>();
 builder.Services.AddScoped<JwtManager>();
 builder.Services.AddScoped<UserService>();
 
-builder.Services.AddDbContext<EotRContext>(b => b.UseSqlServer("workstation id=EchoesOfTheRealms.mssql.somee.com;packet size=4096;user id=Hakuryu_SQLLogin_1;pwd=vgndzvm882;data source=EchoesOfTheRealms.mssql.somee.com;persist security info=False;initial catalog=EchoesOfTheRealms;TrustServerCertificate=True"));
+builder.Services.AddDbContext<EotRContext>(b => b.UseSqlServer(cString));
 
 //Ajout du service venant de l'app externe
 builder.Services.AddScoped<ClasseTest>();
