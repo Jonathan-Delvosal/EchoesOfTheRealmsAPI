@@ -1,4 +1,7 @@
-﻿using EchoesOfTheRealmsShared.Services;
+﻿using EchoesOfTheRealmsShared.DTO;
+using EchoesOfTheRealmsShared.Entities.MonsterFiles;
+using EchoesOfTheRealmsShared.Entities.UserFiles;
+using EchoesOfTheRealmsShared.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EchoesOfTheRealmsAPI.Controllers
@@ -6,7 +9,7 @@ namespace EchoesOfTheRealmsAPI.Controllers
     [ApiController]
     [Route("api/Character")]
 
-    public class PCController(PCService pCService) : ControllerBase
+    public class PCController(PCService _pCService) : ControllerBase
     {
 
         //Todo: Get pour afficher les personnages crées par un utilisateur
@@ -23,8 +26,22 @@ namespace EchoesOfTheRealmsAPI.Controllers
 
 
         //Todo: Get pour afficher les stat du perso
-        //[HttpGet]
-        //[EndpointDescription("Récupère les infos du personnage")]
+        [HttpGet]
+        [EndpointDescription("Récupère les infos du personnage")]
+
+        public ActionResult<PCSheetDTO> GetPCStat(long IdUser, long IdPc)
+        {
+            if (IdUser <= 0 || IdPc <= 0) return BadRequest();
+
+            PCSheetDTO? pC = _pCService.GetPcByUserId(IdUser, IdPc);
+
+            if (pC == null) { return NotFound(); }
+
+            else
+            {
+                return Ok(pC);
+            }
+        }
 
 
         //Todo : Post pour modifier les stat du perso ( genre quand il up de lvl )
