@@ -2,7 +2,8 @@
 using EchoesOfTheRealmsShared.DTO;
 using EchoesOfTheRealmsShared.Entities.MonsterFiles;
 using EchoesOfTheRealmsShared.Services;
-using EotR.App.Services; 
+using EotR.App.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -13,7 +14,6 @@ namespace EotRAPI.Controllers
     [Route("api/monster")]
     public class MonsterController(MonsterService _mService) : ControllerBase
     {
-
         [HttpGet("{id:int}")]
         //[ProducesResponseType(typeof(MonsterScreenResponseDTO), 200, "application/json")]
         [EndpointDescription("Permet d'afficher les statistiques d'un monstre, selon son ID / Allows you to display a monster's statistics, according to its ID")]

@@ -2,7 +2,10 @@
 using EchoesOfTheRealmsShared.Entities.MonsterFiles;
 using EchoesOfTheRealmsShared.Entities.UserFiles;
 using EchoesOfTheRealmsShared.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace EchoesOfTheRealmsAPI.Controllers
 {
@@ -14,9 +17,20 @@ namespace EchoesOfTheRealmsAPI.Controllers
 
         //Todo: Get pour afficher les personnages crées par un utilisateur
 
-        //[HttpGet]
-        //[EndpointDescription("Récupère les personnages liés à un utilisateur")]
+        [HttpGet ("GetPCByUser")]
+        [EndpointDescription("Récupère les personnages liés à un utilisateur")]
+        [Authorize]
 
+        public ActionResult<PCSheetDTO> GetPCByUser()
+        {
+
+            long idUser = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            List<PCSheetDTO> pC = _pCService.GetAllPcByUser(idUser);
+
+            return Ok(pC);
+
+        }
 
         //Todo: Post pour créer un personnage
         //[HttpPost]
@@ -26,14 +40,16 @@ namespace EchoesOfTheRealmsAPI.Controllers
 
 
         //Todo: Get pour afficher les stat du perso
-        [HttpGet]
+        [HttpGet ("GetPCStat/{IdPc}")]
         [EndpointDescription("Récupère les infos du personnage")]
-
-        public ActionResult<PCSheetDTO> GetPCStat(long IdUser, long IdPc)
+        [Authorize]
+        public ActionResult<PCSheetDTO> GetPCStat(long IdPc)
         {
-            if (IdUser <= 0 || IdPc <= 0) return BadRequest();
+            long idUser = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            PCSheetDTO? pC = _pCService.GetPcByUserId(IdUser, IdPc);
+            if (idUser <= 0 || IdPc <= 0) return BadRequest();
+
+            PCSheetDTO? pC = _pCService.GetPcByUserId(idUser, IdPc);
 
             if (pC == null) { return NotFound(); }
 
