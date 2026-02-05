@@ -73,6 +73,33 @@ namespace EchoesOfTheRealmsAPI.Controllers
 
         //Todo: Update pour reposer le personnage ( genre quand il dort au campement )
 
+        //Todo: Le get pour récupérer les différentes classes
+        [HttpGet("GetAllJob")]
+        [EndpointDescription("Récupère la liste de toutes les classes existantes")]
+
+        public ActionResult<JobDTO> GetAllJob()
+        {
+            try
+            {
+
+                List<JobDTO> job = _pCService.GetAllJobs();
+
+                if (job == null) { return NotFound(); }
+
+                else
+                {
+                    return Ok(job);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                return Problem(ex.Message);
+            }
+        }
+
     }
 
 }
