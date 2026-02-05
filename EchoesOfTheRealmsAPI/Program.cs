@@ -3,6 +3,7 @@ using EchoesOfTheRealmsShared.Services;
 using EotR.App.Services;
 using EotR.App.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -10,7 +11,7 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-string cString = builder.Configuration.GetConnectionString("DefaultDev");
+string? cString = builder.Configuration.GetConnectionString("Default");
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -56,7 +57,7 @@ var app = builder.Build();
 app.UseCors();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+//if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -65,6 +66,12 @@ if (app.Environment.IsDevelopment())
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapGet("/", () =>
+{
+    return Results.Redirect("/swagger");
+});
+
 app.MapControllers();
+
 
 app.Run();
