@@ -1,19 +1,36 @@
-﻿using EchoesOfTheRealmsShared.Services;
+﻿using EchoesOfTheRealmsShared.DTO;
+using EchoesOfTheRealmsShared.Entities.MonsterFiles;
+using EchoesOfTheRealmsShared.Entities.UserFiles;
+using EchoesOfTheRealmsShared.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace EchoesOfTheRealmsAPI.Controllers
 {
     [ApiController]
     [Route("api/Character")]
 
-    public class PCController(PCService pCService) : ControllerBase
+    public class PCController(PCService _pCService) : ControllerBase
     {
 
         //Todo: Get pour afficher les personnages crées par un utilisateur
 
-        //[HttpGet]
-        //[EndpointDescription("Récupère les personnages liés à un utilisateur")]
+        [HttpGet ("GetPCByUser")]
+        [EndpointDescription("Récupère les personnages liés à un utilisateur")]
+        [Authorize]
 
+        public ActionResult<PCSheetDTO> GetPCByUser()
+        {
+
+            long idUser = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            List<PCSheetDTO> pC = _pCService.GetAllPcByUser(idUser);
+
+            return Ok(pC);
+
+        }
 
         //Todo: Post pour créer un personnage
         //[HttpPost]
@@ -23,8 +40,24 @@ namespace EchoesOfTheRealmsAPI.Controllers
 
 
         //Todo: Get pour afficher les stat du perso
-        //[HttpGet]
-        //[EndpointDescription("Récupère les infos du personnage")]
+        [HttpGet ("GetPCStat/{IdPc}")]
+        [EndpointDescription("Récupère les infos du personnage")]
+        [Authorize]
+        public ActionResult<PCSheetDTO> GetPCStat(long IdPc)
+        {
+            long idUser = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            if (idUser <= 0 || IdPc <= 0) return BadRequest();
+
+            PCSheetDTO? pC = _pCService.GetPcByUserId(idUser, IdPc);
+
+            if (pC == null) { return NotFound(); }
+
+            else
+            {
+                return Ok(pC);
+            }
+        }
 
 
         //Todo : Post pour modifier les stat du perso ( genre quand il up de lvl )

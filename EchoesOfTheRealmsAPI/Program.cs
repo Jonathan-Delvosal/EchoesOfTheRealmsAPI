@@ -2,8 +2,11 @@ using EchoesOfTheRealms;
 using EchoesOfTheRealmsShared.Services;
 using EotR.App.Services;
 using EotR.App.Utils;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +17,18 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddAuthentication().AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, o =>
+{
+    o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        ValidateAudience = false,
+        ValidateIssuer = false,
+        ValidateLifetime = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("EchoesOfTheRealms by Haku!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"))
+    };
+});
 
 builder.Services.AddScoped(_ =>
 {
@@ -28,6 +43,7 @@ builder.Services.AddScoped<MonsterService>();
 builder.Services.AddScoped<AIService>();
 builder.Services.AddScoped<JwtManager>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<PCService>();
 
 builder.Services.AddDbContext<EotRContext>(b => b.UseSqlServer(cString));
 
@@ -47,7 +63,8 @@ app.UseCors();
     app.UseSwaggerUI();
 }
 
-//app.UseAuthorization();
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapGet("/", () =>
 {
