@@ -24,11 +24,18 @@ namespace EchoesOfTheRealmsAPI.Controllers
         public ActionResult<PCSheetDTO> GetPCByUser()
         {
 
-            long idUser = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            try
+            {
+                long idUser = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            List<PCSheetDTO> pC = _pCService.GetAllPcByUser(idUser);
+                List<PCSheetDTO> pC = _pCService.GetAllPcByUser(idUser);
 
-            return Ok(pC);
+                return Ok(pC);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
 
         }
 
