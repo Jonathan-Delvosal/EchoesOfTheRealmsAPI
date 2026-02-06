@@ -61,8 +61,18 @@ namespace EchoesOfTheRealmsAPI.Controllers
 
 
         //Todo : Post pour modifier les stat du perso ( genre quand il up de lvl )
-        //[HttpPost]
-        //[EndpointDescription("Permet de modifier les stats d'un perso dans la DB")]
+        [HttpPut("{idPc}")]
+        [EndpointDescription("Permet de sauvegarder le perso dans la db")]
+        [Authorize]
+
+        public ActionResult<SavingPCDTO> PutSavePC(SavingPCDTO savingPCDTO,  long idPc)
+        {
+            long idUser = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            _pCService.PutSavePC(savingPCDTO,idUser, idPc);
+
+            return Ok();
+        }
 
 
         //Todo: Get pour afficher l'inventaire du perso

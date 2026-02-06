@@ -3,6 +3,7 @@ using EchoesOfTheRealmsShared.DTO;
 using EchoesOfTheRealmsShared.Entities.UserFiles;
 using EchoesOfTheRealmsShared.Services;
 using EotR.App.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Authentication;
 
@@ -25,8 +26,6 @@ namespace EchoesOfTheRealmsAPI.Controllers
             try
             {
                 User User = _uService.Login(dto.Username, dto.Password);
-
-                // créer un token
 
                 string token = jwtManager.CreateToken(User.Id, User.NickName, User.UserRoles.Select(r => r.Name).ToList());
 
@@ -62,6 +61,17 @@ namespace EchoesOfTheRealmsAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        // Todo: Get pour vérifier si le user à déjà un perso ou non
+
+        //[HttpGet("CheckCharacter")]
+        //[EndpointDescription("Permet de vérifier si le User possède déjà un personnage ou non")]
+        //[Authorize]
+
+        //public ActionResult CheckCharacter(UserDTO dto)
+        //{
+        //    var check 
+        //}
 
     }
 }
