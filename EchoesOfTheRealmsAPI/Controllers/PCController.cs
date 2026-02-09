@@ -61,15 +61,15 @@ namespace EchoesOfTheRealmsAPI.Controllers
 
 
         //Todo : Post pour modifier les stat du perso ( genre quand il up de lvl )
-        [HttpPut("{idPc}")]
+        [HttpPut("PutSavePC/{IdPc}")]
         [EndpointDescription("Permet de sauvegarder le perso dans la db")]
         [Authorize]
 
-        public ActionResult<SavingPCDTO> PutSavePC(SavingPCDTO savingPCDTO,  long idPc)
+        public ActionResult<SavingPCDTO> PutSavePC(SavingPCDTO savingPCDTO,  long IdPc)
         {
             long idUser = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            _pCService.PutSavePC(savingPCDTO,idUser, idPc);
+            _pCService.PutSavePC(savingPCDTO,idUser, IdPc);
 
             return Ok();
         }
