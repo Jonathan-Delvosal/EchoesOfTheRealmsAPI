@@ -33,8 +33,18 @@ namespace EchoesOfTheRealmsAPI.Controllers
         }
 
         //Todo: Post pour créer un personnage
-        //[HttpPost]
-        //[EndpointDescription("Permet de créer un nouveau personnage lié à un utilisateur")]
+        [HttpPost ("PostNewPC")]
+        [EndpointDescription("Permet de créer un nouveau personnage lié à un utilisateur")]
+        [Authorize]
+
+        public ActionResult<PCSheetDTO> PostNewPC(NewPCSheetDTO dto)
+        {
+            int idUser = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            _pCService.PostNewPC(dto, idUser);
+
+            return Ok();            
+        }
 
         //Todo: Get pour stat perso ( a voir s'il faut pas changer la DB pour faire une classe avatar qui reprends les stats du perso + stat equip + stat job ... )
 
