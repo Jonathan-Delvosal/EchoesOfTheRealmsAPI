@@ -69,6 +69,22 @@ namespace EchoesOfTheRealmsAPI.Controllers
             }
         }
 
+        [HttpGet("GetPCResolved/{IdPc}")]
+        [EndpointDescription("Récupère la fiche personnage avec stats totales calculées (job + équipements)")]
+        [Authorize]
+        public ActionResult<PCSheetResolvedDTO> GetPCResolved(long IdPc)
+        {
+            long idUser = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            if (idUser <= 0 || IdPc <= 0) return BadRequest();
+
+            PCSheetResolvedDTO? pc = _pCService.GetPcResolvedByUserId(idUser, IdPc);
+
+            if (pc == null) return NotFound();
+
+            return Ok(pc);
+        }
+
 
         //Todo : Post pour modifier les stat du perso ( genre quand il up de lvl )
         [HttpPut("PutSavePC/{IdPc}")]
@@ -119,6 +135,8 @@ namespace EchoesOfTheRealmsAPI.Controllers
                 return Problem(ex.Message);
             }
         }
+
+        
 
     }
 
