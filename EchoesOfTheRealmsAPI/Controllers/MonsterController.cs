@@ -34,7 +34,7 @@ namespace EotRAPI.Controllers
 
         }
 
-        [HttpGet("Random Level")]
+        [HttpGet("RandomLevel")]
         //[ProducesResponseType(typeof(MonsterScreenResponseDTO), 200, "application/json")]
         [EndpointDescription("Choisi un monstre random pour lancer un combat / choose a random monster to start a fight")]
         public ActionResult<MonsterScreenResponseDTO> GetRandomMonster(int lvlMin, int lvlMax)

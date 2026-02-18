@@ -40,8 +40,18 @@ namespace EchoesOfTheRealmsAPI.Controllers
         }
 
         //Todo: Post pour créer un personnage
-        //[HttpPost]
-        //[EndpointDescription("Permet de créer un nouveau personnage lié à un utilisateur")]
+        [HttpPost ("PostNewPC")]
+        [EndpointDescription("Permet de créer un nouveau personnage lié à un utilisateur")]
+        [Authorize]
+
+        public ActionResult<PCSheetDTO> PostNewPC(NewPCSheetDTO dto)
+        {
+            int idUser = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            _pCService.PostNewPC(dto, idUser);
+
+            return Ok();            
+        }
 
         //Todo: Get pour stat perso ( a voir s'il faut pas changer la DB pour faire une classe avatar qui reprends les stats du perso + stat equip + stat job ... )
 
@@ -66,17 +76,33 @@ namespace EchoesOfTheRealmsAPI.Controllers
             }
         }
 
-
-        //Todo : Post pour modifier les stat du perso ( genre quand il up de lvl )
-        [HttpPut("{idPc}")]
-        [EndpointDescription("Permet de sauvegarder le perso dans la db")]
+        [HttpGet("GetPCResolved/{IdPc}")]
+        [EndpointDescription("Récupère la fiche personnage avec stats totales calculées (job + équipements)")]
         [Authorize]
-
-        public ActionResult<SavingPCDTO> PutSavePC(SavingPCDTO savingPCDTO,  long idPc)
+        public ActionResult<PCSheetResolvedDTO> GetPCResolved(long IdPc)
         {
             long idUser = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            _pCService.PutSavePC(savingPCDTO,idUser, idPc);
+            if (idUser <= 0 || IdPc <= 0) return BadRequest();
+
+            PCSheetResolvedDTO? pc = _pCService.GetPcResolvedByUserId(idUser, IdPc);
+
+            if (pc == null) return NotFound();
+
+            return Ok(pc);
+        }
+
+
+        //Todo : Post pour modifier les stat du perso ( genre quand il up de lvl )
+        [HttpPut("PutSavePC/{IdPc}")]
+        [EndpointDescription("Permet de sauvegarder le perso dans la db")]
+        [Authorize]
+
+        public ActionResult<SavingPCDTO> PutSavePC(SavingPCDTO savingPCDTO,  long IdPc)
+        {
+            long idUser = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            _pCService.PutSavePC(savingPCDTO,idUser, IdPc);
 
             return Ok();
         }
@@ -116,6 +142,8 @@ namespace EchoesOfTheRealmsAPI.Controllers
                 return Problem(ex.Message);
             }
         }
+
+        
 
     }
 
