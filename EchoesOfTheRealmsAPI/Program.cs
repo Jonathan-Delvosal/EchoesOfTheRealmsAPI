@@ -1,5 +1,6 @@
 using EchoesOfTheRealms;
 using EchoesOfTheRealmsShared.Services;
+using EchoesOfTheRealmsShared.Services.AttackService;
 using EotR.App.Services;
 using EotR.App.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -44,6 +45,7 @@ builder.Services.AddScoped<AIService>();
 builder.Services.AddScoped<JwtManager>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<PCService>();
+builder.Services.AddScoped<CombatService>();
 
 builder.Services.AddDbContext<EotRContext>(b => b.UseSqlServer(cString));
 
